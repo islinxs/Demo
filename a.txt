@@ -1,0 +1,26 @@
+vue购物车删除逻辑改改就能用
+      cartDel: function (item) {
+       2                 let _this = this;
+       3                 _this.confirm("确认删除吗？", function () {
+       4                         _this.axios.post(cartDel, qs.stringify({
+       5                             'cart_id': item.cart_id
+       6                         })).then(function (res) {
+       7 //                            console.log(res)
+       8                             if (res.data.code == 200 && res.data.datas == 1) {
+       9 //                                console.log(_this.cart_list.indexOf(item))
+      10                                 var index = _this.cart_list.indexOf(item)
+      11                                 _this.cart_list.splice(index, 1)
+      12 
+      13 
+      14                             }
+      15                         })
+      16                     },
+      17                     function () {
+      18                         _this.toast("取消成功")
+      19 
+      20                     }
+      21                 )
+      22 
+      23             }
+
+   但最好还是把该itemid反给后台，让后台进行计算，然后获取最新的itemList毕竟关于价格前台不安全
